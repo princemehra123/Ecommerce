@@ -23,8 +23,13 @@ class Product extends Model
     {
         return $this->hasMany(ProductMedia::class,'product_id','id');
     }
-    public function AllCat()
+    // public function AllCat()
+    // {
+    //     return $this->hasMany(Category::class,'id');
+    // }
+
+    public function tphotos()
     {
-        return $this->hasMany(Category::class,'id');
+        return $this->hasMany(Thumbnail::class,'product_id','id');
     }
 }

@@ -50,6 +50,7 @@
 
 <div class="mb-3">
 
+
 <label for="product_name">product Name:</label>
 <input type="text" name="product_name"  class="form-control" id="product_name" placeholder="Enter Product">
 
@@ -76,12 +77,20 @@
 
 </div>
 
+
 <div class="mb-3">
 
-<label for="photo">Image:</label>
-<input type="file" name="photo[]" multiple accept="image/*" class="form-control" id="photo" >
+<label for="photo">Product Image:</label>
+<input type="file" name="photo[]" multiple  accept="image/*" class="form-control" id="photo" >
 
 </div>
+
+<div class="mb-3">
+
+    <label for="photo">Thumbnail Image:</label>
+    <input type="file" name="tphoto"  accept="image/*" class="form-control" id="photo" >
+
+    </div>
 
 <div class="mb-3 text-center">
 <button class="button-85" role="button">Save</button>

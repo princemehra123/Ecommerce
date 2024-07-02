@@ -29,6 +29,7 @@
                 </div>
              </div>
           </div>
+
           <div class="carousel-item ">
              <div class="container ">
                 <div class="row">
@@ -54,6 +55,7 @@
                 </div>
              </div>
           </div>
+
           <div class="carousel-item">
              <div class="container ">
                 <div class="row">
@@ -80,6 +82,7 @@
              </div>
           </div>
        </div>
+       
        <div class="container">
           <ol class="carousel-indicators">
              <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>

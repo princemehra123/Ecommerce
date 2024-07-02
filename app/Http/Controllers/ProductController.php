@@ -6,8 +6,11 @@ use App\Models\CategoryProduct;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductMedia;
+use App\Models\Thumbnail;
 use Image;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ProductController extends Controller
 {
@@ -58,14 +61,11 @@ class ProductController extends Controller
 
         ]);
 
-        // if($request->photo){
-        //     $filename=time() . '_' . $request->photo->getClientOriginalName();
 
-        //    Image::make($request->photo)->save(public_path('photos/'.$filename));
 
-        //    Image::make($request->photo)->resize(150,150)->save(public_path('thumbnail/'.$filename));
 
-        // }
+
+
 
 
         $info=[
@@ -78,6 +78,46 @@ class ProductController extends Controller
 
         ];
        $obj= Product::create($info);
+
+
+       if($request->tphoto)
+       {
+           $filename= $request->tphoto->getClientOriginalName();
+
+       //    Image::make($request->photo)->save(public_path('photos/'.$filename));
+
+          Image::make($request->tphoto)->resize(150,150)->save(public_path('thumbnail/'.$filename));
+
+          $timage=[
+            'product_id'=>$obj->id,
+            'thumbimage'=>$filename
+          ];
+
+    Thumbnail::create($timage);
+
+       }
+
+       if($request->photo)
+       {
+           foreach($request->photo as $imagee)
+           {
+               $filename=[];
+               $imagename= $imagee->getClientOriginalName();
+
+               $imagee->move(public_path('photos'),$imagename);
+
+
+
+
+               $isave=
+               [
+                'product_id'=>$obj->id,
+                'image'=>$imagename,
+               ];
+               ProductMedia::create($isave);
+
+           }
+       }
 
 
        if(count($request->category_id)>0)
@@ -101,26 +141,7 @@ class ProductController extends Controller
     }
 
 
-    foreach($request->photo as $imagee)
 
-    {
-        $filename=[];
-        $imagename= $imagee->getClientOriginalName();
-
-        $imagee->move(public_path('photos'),$imagename);
-
-        // $filename[]= $imagename;
-        // $images= json_encode($filename);
-
-
-        $isave=
-        [
-         'product_id'=>$obj->id,
-         'image'=>$imagename,
-        ];
-        ProductMedia::create($isave);
-
-    }
 
 
 
@@ -231,6 +252,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+
         $product->delete();
     return redirect('/product')->with('grt','Data Deleted Sucessfully');
 

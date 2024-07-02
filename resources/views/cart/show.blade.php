@@ -67,14 +67,14 @@
 
 } */
 
-      </style>
+</style>
 
-   </head>
+</head>
    <body>
       <div class="hero_area">
 
          <!-- header section strats -->
-@include('homee.header')
+            @include('homee.header')
          <!-- end header section -->
          <!-- slider section -->
 
@@ -84,31 +84,41 @@
          {{-- <div class="container border border-dark"  id="center"> --}}
             @if($gt=Session::get('grt'))
 
-            <div class="alert alert-danger">
+            <div class="alert alert-danger" style="box-shadow: 1px 2px 10px;">
 
-            {{$gt}}
+           <h5 class="text-center"> {{$gt}}</h5>
+            </div>
+            @endif
+
+            @if($ogt=Session::get('ogrt'))
+
+            <div class="alert alert-info" style="box-shadow: 1px 2px 10px;">
+
+           <h5 class="text-center"> {{$ogt}}</h5>
             </div>
             @endif
 
 
-          
+
+
 
 
             <table class="container border border-dark " id="table_design" >
                 <thead class="thead">
                 <tr >
-                    <th>S.No.</th>
+                    <th >S.No.</th>
                     <th >Product Name</th>
                     <th >Quantity</th>
                     <th >Price</th>
                     <th >Image</th>
+                    <th >Buy </th>
                     <th >Action</th>
 
 
 
                 </tr>
             </thead>
-
+{{-- {{ $cart }} --}}
                 <?php $totalprice=0;?>
                 @foreach ($cart as $cartdata )
 
@@ -121,21 +131,14 @@
 
 
                     <td>
-{{-- {{$cartdata->image}} --}}
-                        {{-- @foreach($cartdata->image as $img) --}}
-
-
-
-                    {{-- <img src="photos/{{$productimages}}" alt=""> --}}
-                    {{-- <img src="photos/{{$img['image']}}" alt=""> --}}
-                {{-- @endforeach --}}
                         <img src=" photos/{{$cartdata['image']}}" alt="" height="130" width="130">
 
                     </td>
 
-
-
                     <td>
+                        <a href="/cash_order_one/{{ $cartdata['product_id'] }}" class="btn btn-primary" onclick="return confirm('Are You Sure To Place Order?')">Buy Now</a>
+                    </td>
+                    <td >
                         <form method="post" action="/cart/{{$cartdata['id']}}">
 
                         @csrf
@@ -145,6 +148,7 @@
 
                     </form>
                     </td>
+
                 </tr>
 
                 <?php $totalprice=$totalprice + $cartdata->price?>
@@ -152,26 +156,39 @@
 
 
 
+                <div>
+                    <h5 class="text-center">Total Price:<span style="color:green">&#x20b9</span>{{$totalprice}}</h5>
+                </div>
             </table>
 
-            <div>
-                <h1 class="text-center">Total Price:<span style="color:green">&#x20b9</span>{{$totalprice}}</h1>
-            </div>
 
+
+
+            <div class="text-center " style="padding-bottom:10px; padding-top:10px;">
+
+                <h3 class="text-center" style="">Proceed Order</h3>
+                <h6 ><span  style="color:red;">(Note:All orders will place if you order from here )</span></h6>
+
+                <a href="/cash_order/" class="btn btn-success " onclick="return confirm('Are You Sure To Place Order?')">Cash On Delivery</a>
+
+
+                <a href="{{url( 'stripe',$totalprice) }}" class="btn btn-success">Pay Using Card</a>
+
+            </div>
 
 
          {{-- </div> --}}
 
       <!-- footer start -->
-      {{-- @include('homee.footer') --}}
+      @include('homee.footer')
       <!-- footer end -->
-      {{-- <div class="cpy_">
+      <div class="cpy_">
          <p class="mx-auto">© Developed By Prince Mehra <br>
 
             Under Axixa Technologies
 
          </p>
-      </div> --}}
+      </div>
       <!-- jQery -->
       <script src="/homepage/js/jquery-3.4.1.min.js"></script>
       <!-- popper js -->

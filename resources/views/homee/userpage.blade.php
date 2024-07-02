@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
    <head>
+    <base href="/public">
       <!-- Basic -->
       <meta charset="utf-8" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -25,10 +26,13 @@
       <link href="/homepage/css/responsive.css" rel="stylesheet" />
    </head>
    <body>
+    @include('sweetalert::alert')
+
       <div class="hero_area">
 
          <!-- header section strats -->
 @include('homee.header')
+
          <!-- end header section -->
          <!-- slider section -->
          @include('homee.slider')
@@ -63,7 +67,7 @@
       <div class="cpy_">
          <p class="mx-auto">© Developed By Prince Mehra <br>
 
-            Under Axixa Technologies 
+            Under Axixa Technologies
 
          </p>
       </div>

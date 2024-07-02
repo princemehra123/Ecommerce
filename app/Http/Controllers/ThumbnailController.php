@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Thumbnail;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class ThumbnailController extends Controller
 {

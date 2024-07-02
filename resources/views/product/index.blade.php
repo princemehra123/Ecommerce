@@ -21,7 +21,7 @@
         <label for="pl"><h1 style="text-shadow: 1px 1px 2px red, 0 0 1em blue, 0 0 0.2em blue; ">All Products</h1><hr></label>
     </div>
 
-<div class="mb-3 "><a href="/product/create"  class="btn btn-dark" >Create product</a></div>
+<div class="mb-3 "><a href="/product/create"  class="btn btn-dark" >Add Product</a></div>
 
 
 
@@ -69,13 +69,13 @@
         <td>{{$info['price']-$info['discount']*$info['price']/100}}</td>
 
         <td>
-            @if($info['photos'])
+            @if($info['tphotos'])
 
 <div>
-    @foreach($info->photos as $img)
-    
+    @foreach($info->tphotos as $img)
+
     <div >
-        <img src="\photos\{{$img['image']}}" height="150" width="130">
+        <img src="\thumbnail\{{$img['thumbimage']}}" height="150" width="150">
 
     </div>
     @endforeach

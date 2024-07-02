@@ -102,7 +102,7 @@
                    <p>
 
 
-"Get your favorite clothes delivered in a flash! With our lightning-fast shipping,
+"Get your favorite clothes delivered in a flash! With our lightning-fast shipping.
                    </p>
                 </div>
              </div>
@@ -217,7 +217,7 @@
                       Free Shiping
                    </h5>
                    <p>
-                    Shop now and have your favorite clothes delivered to your door without any extra cost.
+                    Shop now and have your favorite clothes delivered to your door.
                    </p>
                 </div>
              </div>
@@ -238,7 +238,7 @@
                       Best Quality
                    </h5>
                    <p>
-                    Unmatched excellence distilled to perfection
+                    Unmatched excellence distilled to perfection we give you best comfort.
                    </p>
                 </div>
              </div>

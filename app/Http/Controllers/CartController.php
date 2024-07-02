@@ -8,6 +8,8 @@ use App\Models\product;
 use App\Models\ProductMedia;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
+
 
 class CartController extends Controller
 {
@@ -29,6 +31,7 @@ class CartController extends Controller
         else
         {
             return redirect('login');
+            
         }
 
     }
@@ -127,55 +130,87 @@ class CartController extends Controller
 
 
             $user=Auth::user();
+            $userid=$user->id;
             $product=Product::find($id);
-
-            $cart= new cart;
-
-            $cart->user_name= $user->name;
-
-            $cart->email= $user->email;
-
-            $cart->phone= $user->phone;
-
-            $cart->user_id= $user->id;
-
-            $cart->product_name= $product->product_name;
-
-            $cart->product_bio= $product->product_bio;
-
-            if($product->afterdiscount)
+            $productid_exists=Cart::where('product_id',$id)->where('user_id',$userid)->get('id')->first();
+            if($productid_exists)
             {
-            $cart->price= $product->afterdiscount * $request->quantity;
+                $cart=Cart::find($productid_exists)->first();
+
+                $quantity=$cart->quantity;
+
+                $cart->quantity=$quantity + $request->quantity;
+
+                if($product->afterdiscount)
+                {
+                $cart->price= $product->afterdiscount * $cart->quantity;
+
+                }
+                else
+                {
+
+                    $cart->price= $product->price * $cart->quantity;
+                }
+
+
+                $cart->save();
+                Alert::success('Item Addes To Cart','Keep Shop With Us');
+
+                return redirect()->back();
 
             }
+
             else
             {
+                $cart= new cart;
 
-                $cart->price= $product->price * $request->quantity;
+                $cart->user_name= $user->name;
+
+                $cart->email= $user->email;
+
+                $cart->phone= $user->phone;
+
+                $cart->address= $user->address;
+
+
+                $cart->user_id= $user->id;
+
+                $cart->product_name= $product->product_name;
+
+                $cart->product_bio= $product->product_bio;
+
+                if($product->afterdiscount)
+                {
+                $cart->price= $product->afterdiscount * $request->quantity;
+
+                }
+                else
+                {
+
+                    $cart->price= $product->price * $request->quantity;
+                }
+
+
+                $cart->product_id= $product->id;
+
+                $cart->quantity=$request->quantity;
+
+                foreach($product->photos as $img)
+                {
+
+                $cart->image=$img->image;
+                }
+               // $cart->image=$productmediaa->image;
+
+                $cart->save();
+Alert::success('Item Addes To Cart','Keep Shop With Us');
+                return redirect()->back();
+
             }
 
-
-            $cart->product_id= $product->id;
-
-            $cart->quantity=$request->quantity;
-
-            foreach($product->photos as $img)
-            {
-
-            $cart->image=$img->image;
-            }
-           // $cart->image=$productmediaa->image;
-
-            $cart->save();
-
-            return redirect()->back();
-
-
-
-
-
-        }
-        else{
+     }
+        else
+        {
             return redirect('login');
         }
     }

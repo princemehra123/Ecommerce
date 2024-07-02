@@ -12,7 +12,26 @@ use App\Models\ProductMedia;
           <h2>
              Our <span>products</span>
           </h2>
-       </div>
+
+          <div>
+            <form action="/product_search/" method="get">
+                @csrf
+                    <i class="fa fa-search" aria-hidden="true" ></i>
+                <label for="search"></label>
+                <input style="width:500px; text-align:center;" id="search" type="text" name="search" placeholder="Search for products..">
+
+                <input type="submit"value="search">
+            </form>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
        <div class="row">
         {{-- {{$productimages}} --}}
         @foreach ($product as $productshow )
@@ -50,20 +69,28 @@ use App\Models\ProductMedia;
                 </div>
 
 
-                <div>
+                {{-- <div>
                     <div class="img-box">
                     @foreach($productshow->photos as $img)
 
 
 
-                    {{-- <img src="photos/{{$productimages}}" alt=""> --}}
                     <img src="photos/{{$img['image']}}" alt="">
                 @endforeach
                 </div>
-             </div>
+             </div> --}}
+
+
+             <div>
+                <div class="img-box">
+                @foreach($productshow->tphotos as $timg)
 
 
 
+                <img src="thumbnail/{{$timg['thumbimage']}}" alt="">
+            @endforeach
+            </div>
+         </div>
 
 
                 <div class="detail-box">
@@ -75,20 +102,20 @@ use App\Models\ProductMedia;
 
                    @if($productshow->discount)
 
-                   <h6 style="text-decoration: line-through " id="margin_set">
+                   <h6 style=" " id="margin_set">
 
-                    <span style="color:green">&#x20b9</span>{{$productshow ['price']}}
+                   Price: <span style="color:green ">&#x20b9</span> <span style="text-decoration: line-through">{{$productshow ['price']}}</span>
 
                    </h6>
 
                         <h6 style="color:red">
 
-                            <span style="color:red">&#x20b9</span>{{$productshow['afterdiscount']}}
+                            Discount Price:<span style="color:red">&#x20b9</span>{{$productshow['afterdiscount']}}
 
                         </h6>
                         @else
                         <h6>
-                            <span style="color:green">&#x20b9</span>{{$productshow ['price']}}
+                            Price:<span style="color:green">&#x20b9</span>{{$productshow ['price']}}
 
                            </h6>
 

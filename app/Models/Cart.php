@@ -18,6 +18,7 @@ class Cart extends Model
         'price',
         'image',
         'user_id',
-        'product_id'
+        'product_id',
+        'address'
     ];
 }

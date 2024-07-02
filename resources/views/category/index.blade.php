@@ -31,16 +31,15 @@
 
         <td>
             <form method="post" action="/category/{{$info['id']}}">
-
             @csrf
             @method('delete')
             <button class="btn btn-danger" onclick="return confirm('Do you really want to delete this record?')">Delete</button>
-        
+
         </form>
         </td>
-        
+
     </tr>
-    
+
     @endforeach
 </tbody>
 </table>

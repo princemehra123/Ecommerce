@@ -36,7 +36,7 @@
         }
 
         .card-image img {
-          width: 100%;
+          width: 300px;
           height: auto;
           display: block;
         }
@@ -51,19 +51,29 @@
           margin-bottom: 10px;
         }
 
+        .about{
+            font-size: 1.2em;
+        }
+
+
         .card-description {
-          font-size: 0.9rem;
-          color: #555;
+          font-size: 1em;
+          color: black;
           line-height: 1.4;
         }
 
         .card-price {
-          font-size: 1.1rem;
+          font-size: 1.2rem;
           font-weight: bold;
           color: #009688;
           margin-top: 10px;
         }
-      </style>
+
+        .discountprice{
+            font-size: 1.2em;
+        }
+
+              </style>
 
 
    </head>
@@ -72,52 +82,19 @@
 
          <!-- header section strats -->
 @include('homee.header')
-         <!-- end header section -->
-         <!-- slider section -->
+         <!-- end header section-->
+         @if($gt=Session::get('grt'))
 
-         <!-- end slider section -->
+         <div class="alert alert-primary" style="box-shadow: 1px 2px 10px;" >
+
+       <h3 class="text-center">{{$gt}}</h3>
+         </div>
+         @endif
 
 
       <div class="col-sm-6 col-md-4 col-lg-4" style="margin: auto; width:50%; padding:20px">
 
 
-        <body>
-
-            <div class="card">
-              <div class="card-image">
-
-                @foreach($product->photos as $img)
-
-
-
-            <img src="photos/{{$img['image']}}" alt="">
-        @endforeach
-              </div>
-              <div class="card-content">
-                <div class="card-title">{{ $product['product_name'] }}</div>
-                <div class="card-description">
-                  {{ $product['product_bio'] }}
-                </div>
-                <div class="card-price">
-                    @if($product->discount!=null)
-
-                    <h6  id="margin_set">
-
-                     Price:<span style="color:green">&#x20b9</span> <span style="text-decoration: line-through ">{{$product ['price']}}</span>
-
-                    </h6>
-
-                         <h6 style="color:red">
-
-                          Discounted Price:<span style="color:red">&#x20b9</span>{{$product['afterdiscount']}}
-
-                         </h6>
-
-                         @else
-
-                         <h6>
-                         <span style="color:green">&#x20b9</span>{{$product['price']}}
-                          </h6>
 
 
 
@@ -125,55 +102,27 @@
 
 
 
-                     @endif
 
 
 
-                </div>
-              </div>
-            </div>
-
-            </body>
-
-        {{-- <div class="box"> --}}
-           {{-- <div class="option_container">
-              <div class="options">
-                 <a href="/productdetails/{{$product->id}}" class="option1">
-               Product Details
-                 </a>
-                 <a href="" class="option2">
-                 Buy Now
-                 </a>
-              </div>
-           </div> --}}
-
-           {{-- <div class="container border border-dark" style="box-shadow: 1px 2px 10px;">
-            <div class="img-box" >
-            @foreach($product->photos as $img)
 
 
 
-            <img src="photos/{{$img['image']}}" alt="">
-        @endforeach
-        </div>
-     </div> --}}
 
- {{-- {{$productshow['price']-$productshow['afterdiscount']*100/$productshow['price']}} --}}
-                       {{-- (frm.fees.value-frm.finalprice.value)*100/frm.fees.value; --}}
+           {{-- <div class="container border border-dark" style="box-shadow: 1px 2px 10px; width:auto; height:auto; " >
+               <div class="img-box" > --}}
+                @if($product->photos)
+           @foreach($product->photos as $img)
+           <img src="photos/{{$img['image']}}" alt="" style="border-radius: 5px;  height:300px; width:250px;"  >
+            @endforeach
+            @endif
+        {{-- </div>
+        </div> --}}
 
- {{-- @foreach($product->AllCat as $cat) --}}
-              {{-- {{$cat['category_id']}} --}}
-              {{-- <h6>Category:{{$cat['id']}}</h6> --}}
-              {{-- @endforeach --}}
-{{-- {{$categoryshow}} --}}
-
-           {{-- <div class="detail-box">
+           <div class="detail-box">
               <h5>
                  Product Name:{{$product['product_name']}}
               </h5>
-
-
-
 
               @if($product->discount!=null)
 
@@ -192,15 +141,8 @@
                    @else
 
                    <h6>
-                   <span style="color:green">&#x20b9</span>{{$product['price']}}
+                   Price:<span style="color:green">&#x20b9</span>{{$product['price']}}
                     </h6>
-
-
-
-
-
-
-
                @endif
 
             <h6>About Product:{{$product['product_bio']}}</h6>
@@ -225,35 +167,13 @@
 
 
 
-           </div> --}}
+           </div>
         {{-- </div> --}}
      </div>
 
-      <!-- why section -->
-
-      <!-- end why section -->
-
-      <!-- arrival section -->
-
-
-      <!-- end arrival section -->
-
-      <!-- product section -->
-
-
-      <!-- end product section -->
-
-      <!-- subscribe section -->
-
-
-      <!-- end subscribe section -->
-
-      <!-- client section -->
-
-      <!-- end client section -->
 
       <!-- footer start -->
-      {{-- @include('homee.footer') --}}
+      @include('homee.footer')
       <!-- footer end -->
       <div class="cpy_">
          <p class="mx-auto">© Developed By Prince Mehra <br>
@@ -273,3 +193,17 @@
    </body>
 </html>
 
+
+{{-- <script>
+let chk = document.getElementById('fout');
+fadeOut(chk, 1000);
+
+function fadeOut(chk, 2000) {
+    element.style.transition = `opacity ${2000 / 1000}s ease`;
+    element.style.opacity = 0;
+
+    setTimeout(() => {
+        element.style.display = 'none';
+    }, 2);
+} --}}
+</script>
